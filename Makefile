@@ -3,3 +3,6 @@ secret : secret.c
 
 choose : choose.c
 	gcc choose.c -o choose
+
+series : series.c
+	gcc series.c -o series
