@@ -6,8 +6,9 @@
 /**
  * Simple factorial function
  * returns -1 if given a negative number
+ * Must use long long, we're dealing with big numbers
  */
-int factorial(int n) {
+long long factorial(long long n) {
 	if (n<0)
 		return -1;
 	if (n==0 || n==1)
@@ -41,10 +42,12 @@ int main(int argc, char** argv) {
 	}
 	if(pid==0) {
 		// child
-		int fac = factorial(n);
+		// this is an inside joke referring to my old high school calc teacher
+		// when reading a factorial, he would say "13 SURPRISE" instead of "13 factorial" because the ! makes the number EXCITING!! YAY!!
+		long long surprise = factorial(n);
 		// close the reading FD
 		close(pipe_fd[0]);
-		int write_success = write(pipe_fd[1], &fac, sizeof(int));
+		int write_success = write(pipe_fd[1], &fac, sizeof(long long));
 		close(pipe_fd[1]);
 		if(write_success < 0) {
 			printf("Could not write to pipe\n");
@@ -54,18 +57,18 @@ int main(int argc, char** argv) {
 	} else {
 		//parent
 		wait(NULL);
-		int n_surprise;
+		long long n_surprise;
 		close(pipe_fd[1]);
-		int read_success = read(pipe_fd[0], &n_surprise, sizeof(int));
+		int read_success = read(pipe_fd[0], &n_surprise, sizeof(long long));
 		close(pipe_fd[0]);
 		if(read_success < 0) {
 			printf("Could not read from pipe\n");
 			return -1;
 		}
-		int m_surprise = factorial(m);
-		int m_minus_n_surprise = factorial(m-n);
-		int result = m_surprise / (m_minus_n_surprise*n_surprise);
-		printf("%d\n", result);
+		long long m_surprise = factorial(m);
+		long long m_minus_n_surprise = factorial(m-n);
+		long long result = m_surprise / (m_minus_n_surprise*n_surprise);
+		printf("%lld\n", result);
 		return 0;
 	}
 }
