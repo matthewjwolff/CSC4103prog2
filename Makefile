@@ -1,3 +1,8 @@
+all :
+	make secret
+	make choose
+	make series
+
 secret : secret.c
 	gcc secret.c -o secret -lrt
 

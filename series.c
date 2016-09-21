@@ -12,8 +12,9 @@ int sigma(int n) {
 /**
  * Simple factorial function
  * returns -1 if given a negative number
+ * must use long long int for big numbers
  */
-int factorial(int n) {
+long long factorial(long long n) {
 	if (n<0)
 		return -1;
 	if (n==0 || n==1)
@@ -39,7 +40,7 @@ int main(int argc, char** argv) {
 	else {
 		//parent
 		// do calculation
-		int product = factorial(n);
+		long long product = factorial(n);
 		//wait for child
 		int child_status;
 		// Linux feature, put status information into child_status
@@ -47,7 +48,8 @@ int main(int argc, char** argv) {
 		// use Linux feature to get return value of child process
 		int sum = WEXITSTATUS(child_status);
 		printf("Sum: %d\n", sum);
-		printf("Product: %d\n", product);
+		// remember that long long is actually long long int
+		printf("Product: %lld\n", product);
 		return 0;
 	}
 }
