@@ -47,7 +47,7 @@ int main(int argc, char** argv) {
 		long long surprise = factorial(n);
 		// close the reading FD
 		close(pipe_fd[0]);
-		int write_success = write(pipe_fd[1], &fac, sizeof(long long));
+		int write_success = write(pipe_fd[1], &surprise, sizeof(long long));
 		close(pipe_fd[1]);
 		if(write_success < 0) {
 			printf("Could not write to pipe\n");
