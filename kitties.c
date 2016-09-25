@@ -31,7 +31,8 @@ int main(int argc, char** argv) {
 	char file_name[9];
 	// seed the rng (time returns time since unix epoch in seconds, clock returns number of millis since start of execution
 	srand( time(NULL) + clock() );
-	for(int i=0; i<8; i++) {
+	int i;
+	for(i=0; i<8; i++) {
 		long int rando = rand();
 		//26 letters in the alphabet, shift up to ASCII value 61
 		file_name[i] = (rando % 26) + 97;
